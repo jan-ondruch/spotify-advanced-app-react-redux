@@ -39,7 +39,10 @@ const fetchTracks = item => dispatch => {
 		.then(response => response.json())
 		.then(json => json.tracks.items.map(item => ({
 			id: item.id,
-			name: item.name
+			name: item.name,
+			artists: item.artists.map(artist => ({
+				artist: artist.name
+			}))
 		})))
 }
 
@@ -49,8 +52,10 @@ const fetchAlbums = item => dispatch => {
 		.then(response => response.json())
 		.then(json => json.albums.items.map(item => ({
 			id: item.id,
-			name: item.name
-		})))
+			name: item.name,
+			artist: item.artists[0].name,
+			image: item.images[2]
+ 		})))
 }
 
 const fetchArtists = item => dispatch => {
@@ -60,11 +65,12 @@ const fetchArtists = item => dispatch => {
 		.then(json => json.artists.items.map(item => ({
 			id: item.id,
 			name: item.name,
-			followers: item.followers.total
+			image: item.images[2]
 		})))
 }
 
 export const fetchData = searchedItem => dispatch => {
+	if (searchedItem === '') return
 	let setArtists = dispatch(fetchArtists(searchedItem))
 	let setAlbums = dispatch(fetchAlbums(searchedItem))
 	let setTracks = dispatch(fetchTracks(searchedItem))

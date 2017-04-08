@@ -6,7 +6,7 @@ import {
 	SELECT_PAGE
 } from '../actions'
 
-const selectedPage = (state = 'top-results', action) => {
+const page = (state = 'top-results', action) => {
 	switch(action.type) {
 		case SELECT_PAGE:
 			return action.page
@@ -15,7 +15,7 @@ const selectedPage = (state = 'top-results', action) => {
 	}
 }
 
-const searchedItem = (state = '', action) => {
+const item = (state = '', action) => {
 	switch(action.type) {
 		case SEARCH_ITEM:
 			return action.item
@@ -60,8 +60,8 @@ const spotifyApp = (state = {}, action) => {
 
 const rootReducer = combineReducers({
 	spotifyApp,
-	searchedItem,
-	selectedPage,
+	item,
+	page,
 })
 
 export default rootReducer

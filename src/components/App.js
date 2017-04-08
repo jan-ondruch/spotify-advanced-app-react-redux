@@ -7,14 +7,14 @@ import { connect } from 'react-redux'
 
 class App extends Component {	
 	componentDidMount() {
-		const { dispatch, searchedItem, selectedPage } = this.props
-		dispatch(fetchData(searchedItem))
+		const { dispatch, item, page } = this.props
+		dispatch(fetchData(item))
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.searchedItem !== this.props.searchedItem) {
-			const { dispatch, searchedItem, selectedPage } = nextProps
-			dispatch(fetchData(searchedItem))
+		if (nextProps.item !== this.props.item) {
+			const { dispatch, item, page } = nextProps
+			dispatch(fetchData(item))
 		}
 	}
 	
@@ -27,7 +27,7 @@ class App extends Component {
 	}
 
 	render() {
-		const { searchedItem, selectedPage, isFetching, itemData } = this.props
+		const { item, page, isFetching, itemData } = this.props
 		let isEmpty = itemData.length === 0
 		return (
 			<div>
@@ -37,29 +37,34 @@ class App extends Component {
 				<Navbar 
 					onClick={this.handlePageChange}
 				/>
-				<PageWrapper 
-					selectedPage={selectedPage}
-					searchedItem={searchedItem}
-				/>
+				{isEmpty
+				  ? (isFetching ? <h4>Loading...</h4> : <h4>Empty.</h4>)
+				  : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
+				      <PageWrapper 
+				      	page={page}
+				      	itemData={itemData}
+				      />
+				    </div>
+				}
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = (state, ownProps) => {
-	let { searchedItem, selectedPage, spotifyApp } = state
-	selectedPage = ownProps.match.params.page || selectedPage	// 2-way binding with rr-v4
+	let { item, page, spotifyApp } = state
+	page = ownProps.match.params.page || page	// 2-way binding with rr-v4
 	const {
 		isFetching,
 		items: itemData
-	} = spotifyApp[searchedItem] || {
+	} = spotifyApp[item] || {
 		isFetching: true,
 		items: []
 	}
 
 	return {
-		selectedPage,
-		searchedItem,
+		page,
+		item,
 		itemData,
 		isFetching
 	}

@@ -1,25 +1,29 @@
 import React from 'react'
+import TopResults from '../components/TopResults'
+import Artists from '../components/Artists'
+import Albums from '../components/Albums'
+import Tracks from '../components/Tracks'
 
-const PageWrapper = ({ selectedPage, searchedItem }) => {
-	switch(selectedPage) {
+const PageWrapper = ({ page, itemData }) => {
+	switch(page) {
 		case 'top-results':
 			return (
-				<div>
-					<h1>TOP RESULTS</h1>
-					{searchedItem}
-				</div>
+				<TopResults itemData={itemData}/>
 			)
 		case 'artists':
 			return (
-				<div>
-					<h1>ARTISTS</h1>
-					{searchedItem}
-				</div>
+				<Artists itemData={itemData}/>
+			)
+		case 'albums':
+			return (
+				<Albums itemData={itemData}/>
+			)
+		case 'tracks':
+			return (
+				<Tracks itemData={itemData}/>
 			)
 		default:
-			return (
-				<h1>OTHER PAGE</h1>
-			)
+			return
 	}
 }
 
