@@ -5,7 +5,12 @@ const Tracks = ({ itemData }) => (
 		<h1>Tracks</h1>
 
 		{itemData.tracks.map(track => (
-			<li key={track.id}>{track.name}</li>
+			<div key={track.id}>
+				<h5>{track.name}</h5>
+				{track.artists.map((artist, i) => (
+					<li key={i}>{artist.name}</li>
+				))}
+			</div>
 		))}
 	</div>
 )

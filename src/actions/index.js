@@ -3,6 +3,7 @@ export const REQUEST_ITEM = 'REQUEST_ITEM'
 export const RECEIVE_ITEM = 'RECEIVE_ITEM'
 export const SELECT_PAGE = 'SELECT_PAGE'
 
+
 export const selectPage = page => ({
 	type: SELECT_PAGE,
 	page
@@ -12,7 +13,6 @@ export const searchItem = item => ({
 	type: SEARCH_ITEM,
 	item
 })
-
 
 export const requestItem = item => ({
   type: REQUEST_ITEM,
@@ -40,9 +40,12 @@ const fetchTracks = item => dispatch => {
 		.then(json => json.tracks.items.map(item => ({
 			id: item.id,
 			name: item.name,
-			artists: item.artists.map(artist => ({
-				artist: artist.name
-			}))
+			artists: item.artists.reduce((artists, artist) => {
+				artists.push({
+					name: artist.name
+				})
+				return artists
+			}, [])
 		})))
 }
 
@@ -70,7 +73,6 @@ const fetchArtists = item => dispatch => {
 }
 
 export const fetchData = searchedItem => dispatch => {
-	if (searchedItem === '') return
 	let setArtists = dispatch(fetchArtists(searchedItem))
 	let setAlbums = dispatch(fetchAlbums(searchedItem))
 	let setTracks = dispatch(fetchTracks(searchedItem))

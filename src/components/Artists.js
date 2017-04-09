@@ -6,7 +6,7 @@ const Artists = ({ itemData }) => (
 
 		{itemData.artists.map(artist => (
 			<div key={artist.id}>
-				<p>{artist.name}</p>
+				<h5>{artist.name}</h5>
 				<img 
 					alt={artist.name}
 					src={artist.image === undefined ? '' : artist.image.url}>

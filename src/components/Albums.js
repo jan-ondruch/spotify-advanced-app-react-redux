@@ -5,7 +5,13 @@ const Albums = ({ itemData }) => (
 		<h1>Albums</h1>
 
 		{itemData.albums.map(album => (
-			<li key={album.id}>{album.name}</li>
+			<div key={album.id}>
+				<h5>{album.name}</h5>
+				<img 
+					alt={album.name}
+					src={album.image === undefined ? '' : album.image.url}>
+				</img>
+			</div>
 		))}
 	</div>
 )

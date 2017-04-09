@@ -3,7 +3,7 @@ import {
 	SEARCH_ITEM,
 	REQUEST_ITEM,
 	RECEIVE_ITEM,
-	SELECT_PAGE
+	SELECT_PAGE,
 } from '../actions'
 
 const page = (state = 'top-results', action) => {
@@ -15,6 +15,7 @@ const page = (state = 'top-results', action) => {
 	}
 }
 
+// initial state is overwritten in the App component
 const item = (state = '', action) => {
 	switch(action.type) {
 		case SEARCH_ITEM:
