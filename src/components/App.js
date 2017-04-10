@@ -6,9 +6,31 @@ import { searchItem, selectPage, fetchData } from '../actions'
 import { connect } from 'react-redux'
 
 class App extends Component {	
+	// Fix initial url paths and redirect accordingly.
+	componentWillMount() {
+		const { dynamicUrlChange, ownProps } = this.props
+
+		// Navigate from room '/' to '/top-results/'
+		if (ownProps.match.url === '/')	{
+			dynamicUrlChange('/top-results/')
+		}
+
+		// Navigate from '/tracks' and other base urls to '/tracks/'
+		// Append the slash to avoid bugs
+		if (ownProps.match.url.slice(-1) !== '/') {
+			dynamicUrlChange(`${ownProps.match.url}/`)
+		}
+
+		// Redirect wrong urls (not catching all edge cases!)
+		if (ownProps.match.url.substring(1, ownProps.match.url.lastIndexOf("/"))) {
+			// catch here localhost:3000/wrongurl/whatver ; localhost:3000/wrongurl
+		}
+
+	}
+
 	componentDidMount() {
-		const { dispatch, item } = this.props
-		if (item === '') return	// avoid initial fetch for no data
+		const { dispatch, item, } = this.props
+		if (item === '') return	// Avoid initial fetch for no data
 		dispatch(fetchData(item))
 	}
 
@@ -21,6 +43,7 @@ class App extends Component {
 	
 	handleSearchBarChange = nextItem => {
 		this.props.dispatch(searchItem(nextItem))
+		this.props.dynamicUrlChange(nextItem)	// Change url programaticall navigation.
 	}
 
 	handlePageChange = nextPage => {
@@ -66,6 +89,9 @@ const mapStateToProps = (state, ownProps) => {
 	page = ownProps.match.params.page || page	
 	item = item || ownProps.match.params.item || ''
 
+	// Change of url on change of search bar: programaticall url change.
+	let dynamicUrlChange = ownProps.history.push
+
 	const {
 		isFetching,
 		items: itemData
@@ -78,7 +104,9 @@ const mapStateToProps = (state, ownProps) => {
 		page,
 		item,
 		itemData,
-		isFetching
+		isFetching,
+		dynamicUrlChange,
+		ownProps // Maybe don't pass the whole ownProps, just the functions/params you need
 	}
 }
 
