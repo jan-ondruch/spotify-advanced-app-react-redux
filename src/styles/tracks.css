@@ -1,0 +1,59 @@
+.track {
+	height: auto;
+	padding: 10px 8px;
+}
+
+.track:hover {
+	background-color: #101010;
+}
+
+.counter {
+	float: left;
+	width: 24px;
+}
+
+.counter p {
+	font-size: 12px;
+	color: #ccc;
+	text-align: right;
+	padding-top: 4px;
+}
+
+.track-artists {
+	padding-left: 40px;
+}
+
+.track-artists h5 {
+	font-size: 16px;
+	font-weight: 100;
+}
+
+.track-artists li {
+	display: inline-block;
+	padding-right: 8px;
+	font-size: 13px;
+	color: #ccc;
+}
+
+@media screen and (min-width: 620px) {
+	.track {
+		margin-right: 32px;
+	}
+
+	.tracks-wrapper {
+		padding-left: 32px;
+	}
+	
+	.counter p {
+		font-size: 14px;
+	}
+
+	.track-artists h5 {
+		font-size: 18px;
+	}
+
+	.track-artists li {
+		font-size: 15px;
+		padding-top: 2px;
+	}
+}

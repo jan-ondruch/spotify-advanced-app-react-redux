@@ -27,19 +27,33 @@ class App extends Component {
 		if (ownProps.match.url.substring(1, ownProps.match.url.lastIndexOf("/"))) {
 			// catch here localhost:3000/wrongurl/whatver ; localhost:3000/wrongurl
 		}
-
 	}
 
 	componentDidMount() {
-		const { dispatch, item, } = this.props
+		const { dispatch, item } = this.props
 		if (item === '') return	// Avoid initial fetch for no data
 		dispatch(fetchData(item))
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.item !== this.props.item) {
-			const { dispatch, item } = nextProps
-			dispatch(fetchData(item))
+		// When search string is removed, we have to fix the url and prevent dispatching
+		// empty item.
+		// Need to check for the previous state of the search bar (this.props) - in case
+		// the length of the nextProps is 0 but the last item was empty, that means we
+		// reloaded the app and we start with the initial state, which is already set in
+		// the CWM lifecycle method.
+		if (nextProps.item.length === 0) {
+			if (this.props.item.length >= 1) {
+				this.props.dynamicUrlChange('top-results/')
+			}
+			return
+		}
+		// Fetch new incoming data if the searched string is different.
+		else {
+			if (nextProps.item !== this.props.item) {
+				const { dispatch, item } = nextProps
+				dispatch(fetchData(item))
+			}
 		}
 	}
 	
@@ -58,7 +72,7 @@ class App extends Component {
 		return (
 			<div>
 				<SearchBar
-					onClick={this.handleSearchBarChange}
+					onChange={this.handleSearchBarChange}
 				/>
 				{isFetching && item === '' ? '' :
 					<Navbar 

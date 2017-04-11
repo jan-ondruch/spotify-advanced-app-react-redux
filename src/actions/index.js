@@ -57,7 +57,7 @@ const fetchAlbums = item => dispatch => {
 			id: item.id,
 			name: item.name,
 			artist: item.artists[0].name,
-			image: item.images[2]
+			image: item.images[1]
  		})))
 }
 
@@ -73,11 +73,19 @@ const fetchArtists = item => dispatch => {
 }
 
 export const fetchData = searchedItem => dispatch => {
-	let setArtists = dispatch(fetchArtists(searchedItem))
-	let setAlbums = dispatch(fetchAlbums(searchedItem))
-	let setTracks = dispatch(fetchTracks(searchedItem))
+	let timeoutHandle
+	clearTimeout(timeoutHandle)
 
-	Promise.all([setArtists, setAlbums, setTracks])
-		.then(values => mergeFetchedData(...values))
-		.then(parsedItems => dispatch(receiveItem(searchedItem, parsedItems)))
+	timeoutHandle = setTimeout(() => {
+			console.log('dispatching!')
+			let setArtists = dispatch(fetchArtists(searchedItem))
+			let setAlbums = dispatch(fetchAlbums(searchedItem))
+			let setTracks = dispatch(fetchTracks(searchedItem))
+
+			Promise.all([setArtists, setAlbums, setTracks])
+				.then(values => mergeFetchedData(...values))
+				.then(parsedItems => dispatch(receiveItem(searchedItem, parsedItems)))
+	}, 1000)
+
+	console.log('after timeout')
 }

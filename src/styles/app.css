@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -9,7 +10,18 @@ body {
 }
 
 a {
-	color: #fff;
+	color: #ccc;
 	text-decoration: none;
 	outline: 0;
+}
+
+a:hover {
+	color: #fff;
+}
+
+/* loading/error messages */
+h4 {
+	text-align: center;
+	padding-top: 64px;
+	color: #888;
 }

@@ -1,23 +1,13 @@
-.artists-wrapper {
+.albums-wrapper {
 	padding: 16px;
 }
 
-.artist img {
-	background-repeat: no-repeat;
-	background-position: 50%;
-	border-radius: 50%;
+.album img {
 	width: 264px;
 	height: 264px;
 }
 
-.artist img:hover {
-	opacity: 0.5;
-	-webkit-transition: opacity 0.15s ease-in-out;
-	-moz-transition: opacity 0.15s ease-in-out;
-	transition: opacity 0.15s ease-in-out;
-}
-
-.artist {
+.album {
 	width: 280px;
 	vertical-align: top;
 	margin-left: auto;
@@ -25,27 +15,35 @@
 	text-align: center;
 }
 
-.artists-wrapper p {
+.albums-wrapper p {
 	padding-top: 6px;
 	padding-bottom: 32px;
+	color: #bbb;
+}
+
+.albums-wrapper h5 {
+	padding-top: 6px;
+	font-size: 16px;
+	font-weight: 100;
 }
 
 @media screen and (min-width: 620px) {
-	.artists-wrapper {
+	.albums-wrapper {
 		text-align: center;
 	}
 
-	.artist {
+	.album {
 		width: 260px;
 	}
 
-	.artist img {
+	.album img {
 		width: 240px;
 		height: 240px;
 	}
 
-	.artist {
+	.album {
 		display: inline-block;
 		padding: 0px 12px;
 	}
+
 }

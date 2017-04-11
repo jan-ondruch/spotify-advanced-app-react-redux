@@ -1,16 +1,19 @@
 import React from 'react'
 
-const Albums = ({ itemData }) => (
-	<div>
-		<h1>Albums</h1>
+import '../styles/albums.css'
+import artistImg from '../images/artist.png'
 
-		{itemData.albums.map(album => (
-			<div key={album.id}>
-				<h5>{album.name}</h5>
-				<img 
+const Albums = ({ itemData, maxItem = 20 }) => (
+	<div className='albums-wrapper'>
+		{itemData.albums.map((album, i) => (
+			i >= maxItem ? '' :
+			<div key={album.id} className='album'>
+				<img
 					alt={album.name}
-					src={album.image === undefined ? '' : album.image.url}>
+					src={album.image === undefined ? artistImg : album.image.url}>
 				</img>
+				<h5>{album.name}</h5>
+				<p>By {album.artist}</p>
 			</div>
 		))}
 	</div>
