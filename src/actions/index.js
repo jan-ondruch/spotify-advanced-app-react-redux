@@ -68,7 +68,7 @@ const fetchArtists = item => dispatch => {
 		.then(json => json.artists.items.map(item => ({
 			id: item.id,
 			name: item.name,
-			image: item.images[2]
+			image: item.images[1]
 		})))
 }
 

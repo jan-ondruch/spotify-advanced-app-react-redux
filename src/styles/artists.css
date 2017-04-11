@@ -1,0 +1,39 @@
+.artists-wrapper {
+	padding: 16px;
+}
+
+.artist img {
+	background-repeat: no-repeat;
+	background-position: 50%;
+	border-radius: 50%;
+	width: 264px;
+	height: 264px;
+}
+
+.artist {
+	max-width: 300px;
+	margin: auto;
+	text-align: center;
+}
+
+.artists-wrapper p {
+	padding-top: 6px;
+	padding-bottom: 32px;
+}
+
+@media screen and (min-width: 620px) {
+	.artists-wrapper {
+		text-align: center;
+	}
+
+	.artist img {
+		width: 240px;
+		height: 240px;
+	}
+
+	.artist {
+		display: inline-block;
+		padding: 0px 24px;
+	}
+
+}

@@ -1,16 +1,17 @@
 import React from 'react'
 
-const Artists = ({ itemData }) => (
-	<div>
-		<h1>Artists</h1>
+import '../styles/artists.css'
+import artistImg from '../images/artist.png'
 
+const Artists = ({ itemData }) => (
+	<div className='artists-wrapper'>
 		{itemData.artists.map(artist => (
-			<div key={artist.id}>
-				<h5>{artist.name}</h5>
+			<div key={artist.id} className='artist'>
 				<img 
 					alt={artist.name}
-					src={artist.image === undefined ? '' : artist.image.url}>
+					src={artist.image === undefined ? artistImg : artist.image.url}>
 				</img>
+				<p>{artist.name}</p>
 			</div>
 		))}
 	</div>

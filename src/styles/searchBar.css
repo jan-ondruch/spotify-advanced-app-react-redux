@@ -1,0 +1,48 @@
+.searchBar-wrapper {
+	background-color: #242424;
+	padding: 24px 24px;
+	color: #ccc;
+}
+
+.searchBar-wrapper p {
+	font-size: 12px;
+	padding-left: 6px;
+	padding-bottom: 16px;
+}
+
+.searchBar-wrapper form {
+	color: #fff;
+	text-align: center;
+}
+
+.searchBar-wrapper form input {
+	background-color: #242424;
+	border: 0px solid #fff;
+	font-size: 24px;
+	color: #fff;
+	width: 300px;
+}
+
+*::-webkit-input-placeholder {
+    color: #ddd;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: #ddd;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: #ddd;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #ddd;
+}
+
+input, select, textarea{
+    color: #ff0000;
+}
+
+textarea:focus, input:focus {
+    color: #ff0000;
+}

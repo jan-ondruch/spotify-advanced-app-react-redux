@@ -1,0 +1,10 @@
+.navbar-wrapper {
+	padding: 24px 16px;
+	text-align: center;
+	background-color: #151515;
+}
+
+.navbar-wrapper li {
+	display: inline-block;
+	padding: 0px 8px;
+}

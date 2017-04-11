@@ -5,6 +5,8 @@ import PageWrapper from '../containers/PageWrapper'
 import { searchItem, selectPage, fetchData } from '../actions'
 import { connect } from 'react-redux'
 
+import '../styles/app.css'
+
 class App extends Component {	
 	// Fix initial url paths and redirect accordingly.
 	componentWillMount() {
@@ -55,16 +57,18 @@ class App extends Component {
 		let isEmpty = itemData.length === 0
 		return (
 			<div>
-				<SearchBar 
+				<SearchBar
 					onClick={this.handleSearchBarChange}
 				/>
-				<Navbar 
-					onClick={this.handlePageChange}
-					subPage={item}
-				/>
+				{isFetching && item === '' ? '' :
+					<Navbar 
+						onClick={this.handlePageChange}
+						subPage={item}
+					/>
+				}
 				{isEmpty
 				  ? (isFetching 
-				  	? (item === '' ? <h4>Search for an Artist, Song or Album</h4> : <h4>Loading...</h4>)
+				  	? (item === '' ? <h4>Spotify-based app by Jan Ondruch</h4> : <h4>Loading...</h4>)
 				  	: <h4>Empty.</h4>)
 				  : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
 				      <PageWrapper 
