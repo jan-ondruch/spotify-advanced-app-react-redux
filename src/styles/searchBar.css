@@ -15,7 +15,7 @@
 
 .searchBar-wrapper form input {
 	background-color: #242424;
-	border: 0px solid #fff;
+	border: 0px;
 	font-size: 24px;
 	color: #fff;
 }

@@ -9,7 +9,6 @@ const FilterLink = ({ page, subPage, onClick, children }) => {
 
 	return (
 		<Link	to={url}	
-					//replace
 					onClick={() => onClick(page)}>
 			{children}
 		</Link>

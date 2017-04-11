@@ -78,6 +78,7 @@ class App extends Component {
 					<Navbar 
 						onClick={this.handlePageChange}
 						subPage={item}
+						page={page}
 					/>
 				}
 				{isEmpty
