@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import '../styles/searchBar.css'
 
-let SearchBar = ({ dispatch, onChange }) => {
-	let input
+let SearchBar = ({ dispatch, onChange, item }) => {
+	let input = item
 
 	return (
 		<div className='searchBar-wrapper'>
@@ -14,17 +14,13 @@ let SearchBar = ({ dispatch, onChange }) => {
 			  onChange(input.value)
 			}}>
 			  <input
+			  	defaultValue={item}
 			  	placeholder="Start typing..." 
 			  	ref={node => { // React callback ref API: ref is a function and gets 
 			                   // the corresponding node and saves it into 'input',
 			                   // so we can use it in the event handler. **X**
 			    input = node
 			  }} />
-			  {/*
-			  <button type="submit">
-			    Search
-			  </button>
-				*/}
 			</form>
 		</div>
 	)

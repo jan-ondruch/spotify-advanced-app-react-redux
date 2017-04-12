@@ -10,22 +10,32 @@ import '../styles/app.css'
 class App extends Component {	
 	// Fix initial url paths and redirect accordingly.
 	componentWillMount() {
-		const { dynamicUrlChange, ownProps } = this.props
+		const { dynamicUrlChange, ownProps, page, item } = this.props
 
 		// Navigate from room '/' to '/top-results/'
 		if (ownProps.match.url === '/')	{
 			dynamicUrlChange('/top-results/')
+			return
 		}
 
 		// Navigate from '/tracks' and other base urls to '/tracks/'
-		// Append the slash to avoid bugs
-		if (ownProps.match.url.slice(-1) !== '/') {
+		// Append the slash to avoid bugs.
+		// And don't add '/' after if item is specified.
+		if (ownProps.match.url.slice(-1) !== '/' && item.length === 0) {
 			dynamicUrlChange(`${ownProps.match.url}/`)
+			return
 		}
 
-		// Redirect wrong urls (not catching all edge cases!)
-		if (ownProps.match.url.substring(1, ownProps.match.url.lastIndexOf("/"))) {
-			// catch here localhost:3000/wrongurl/whatver ; localhost:3000/wrongurl
+		// Remove '/' from the url is item is specified.
+		// e.g. /artists/akon/ -> /artists/akon
+		if (item.length !== 0 && ownProps.match.url.slice(-1) === '/') {
+			dynamicUrlChange(`/${page}/${item}`)
+			return
+		}
+
+		// Change path to e.g. /artists/akon from /artists/akon/some/thing...
+		if (ownProps.location.pathname.match((/\//g) || []).length >= 3) {
+			dynamicUrlChange(`/${page}/${item}`)
 		}
 	}
 
@@ -73,6 +83,7 @@ class App extends Component {
 			<div>
 				<SearchBar
 					onChange={this.handleSearchBarChange}
+					item={item}
 				/>
 				{isFetching && item === '' ? '' :
 					<Navbar 
@@ -97,16 +108,13 @@ class App extends Component {
 	}
 }
 
-// FOR THE URL UPDATE, TRY OWNPROPS IN MSTP (HISTORY, PUSH)
-// AND CWM PROBABLY?
-// http://stackoverflow.com/questions/42271877/changing-the-url-in-react-router-v4-without-using-redirect-or-link
-
 const mapStateToProps = (state, ownProps) => {
 	let { item, page, spotifyApp } = state
 	// 2-way binding with rr-v4.
 	// @item: Get the item from the search bar, if none, take it from the url, '' as fallback.
 	page = ownProps.match.params.page || page	
 	item = item || ownProps.match.params.item || ''
+	console.log(ownProps);
 
 	// Change of url on change of search bar: programaticall url change.
 	let dynamicUrlChange = ownProps.history.push
