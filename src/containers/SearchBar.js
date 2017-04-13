@@ -8,7 +8,7 @@ let SearchBar = ({ dispatch, onChange, item }) => {
 
 	return (
 		<div className='searchBar-wrapper'>
-			<p>Search for an Artist, Song, Album or Playlist</p>
+			<p>Search for an Artist, Song or Album</p>
 			<form onChange={e => { // **X**
 			  e.preventDefault()
 			  onChange(input.value)

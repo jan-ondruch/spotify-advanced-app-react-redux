@@ -1,12 +1,22 @@
-const express = require('express')
-const path = require('path')
-const port = process.env.PORT || 3000
-const app = express()
+import path from 'path'
+import Express from 'express'
+import React from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import counterApp from './reducers'
+import App from './containers/App'
 
-app.use(express.static('build'))
+const app = Express()
+const port = 3000
 
-app.get('*', (req, res) => {
-	res.sendFile(path.resolve('build', '/index.html'))
-})
+//Serve static files
+app.use('/static', Express.static('static'));
+
+// This is fired every time the server side receives a request
+app.use(handleRender)
+
+// We are going to fill these out in the sections to follow
+function handleRender(req, res) { /* ... */ }
+function renderFullPage(html, preloadedState) { /* ... */ }
 
 app.listen(port)

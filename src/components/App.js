@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 import '../styles/app.css'
 
+
 class App extends Component {	
 	// Fix initial url paths and redirect accordingly.
 	componentWillMount() {
@@ -94,7 +95,7 @@ class App extends Component {
 				}
 				{isEmpty
 				  ? (isFetching 
-				  	? (item === '' ? <h4>Spotify-based app by Jan Ondruch</h4> : <h4>Loading...</h4>)
+				  	? (item === '' ? <Info /> : <h4>Loading...</h4>)
 				  	: <h4>Empty.</h4>)
 				  : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
 				      <PageWrapper 
@@ -107,6 +108,16 @@ class App extends Component {
 		)
 	}
 }
+
+
+const Info = () => (
+	<div className='info'>
+		<h4>Spotify-based app coded with React/Redux.</h4>
+		<h5><a href='https://github.com/jan-ondruch/spotify-redux'>View the project on Github.</a></h5>
+		<p>@2017, Jan Ondruch</p>
+	</div>
+)
+
 
 const mapStateToProps = (state, ownProps) => {
 	let { item, page, spotifyApp } = state

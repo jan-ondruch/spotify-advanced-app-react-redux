@@ -25,3 +25,17 @@ h4 {
 	padding-top: 64px;
 	color: #888;
 }
+
+.info {
+	text-align: center;
+}
+
+.info h5 {
+	padding-top: 16px;
+	padding-bottom: 24px;
+}
+
+.info p {
+	font-size: 10px;
+	color: #ccc;
+}

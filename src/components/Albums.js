@@ -1,7 +1,7 @@
 import React from 'react'
 
 import '../styles/albums.css'
-import artistImg from '../images/artist.png'
+import artistImg from '../images/artist-music.jpg'
 
 const Albums = ({ itemData, maxItem = 20 }) => (
 	<div className='albums-wrapper'>
