@@ -38,11 +38,13 @@
 }
 
 input, select, textarea{
-    color: #ff0000;
+    color: #fff;
+    border: 0px;
 }
 
 textarea:focus, input:focus {
-    color: #ff0000;
+    color: #fff;
+    border: 0px;
 }
 
 @media screen and (min-width: 620px) {

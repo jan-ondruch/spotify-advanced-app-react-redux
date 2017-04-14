@@ -125,7 +125,6 @@ const mapStateToProps = (state, ownProps) => {
 	// @item: Get the item from the search bar, if none, take it from the url, '' as fallback.
 	page = ownProps.match.params.page || page	
 	item = item || ownProps.match.params.item || ''
-	console.log(ownProps);
 
 	// Change of url on change of search bar: programaticall url change.
 	let dynamicUrlChange = ownProps.history.push

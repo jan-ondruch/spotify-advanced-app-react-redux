@@ -14,6 +14,7 @@ let SearchBar = ({ dispatch, onChange, item }) => {
 			  onChange(input.value)
 			}}>
 			  <input
+			  	autoFocus
 			  	defaultValue={item}
 			  	placeholder="Start typing..." 
 			  	ref={node => { // React callback ref API: ref is a function and gets 
