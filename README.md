@@ -1,7 +1,7 @@
 # Spotify based app with React, Redux, and Surge
 
-A simplified Spotify-based app for technology and demonstration purposes - build with React, Redux, and deployed on Surge.<br>
-Try the demo at http://advanced-spotify.surge.sh/<br>
+A simplified Spotify-based app for technology and demonstration purposes - build with React, Redux, and deployed on Surge.<br><br>
+Try the demo at http://advanced-spotify.surge.sh/<br><br>
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
 ## Possible future improvements
