@@ -2,9 +2,13 @@ import React from 'react'
 
 import '../styles/tracks.css'
 
-// @itemData: searched item data
-// @maxItem: maximum number of items to be displayed.
-//					 when top-results call Tracks, maxItem of 5 is passed.
+
+/*
+ * Renders searched tracks.
+ * @itemData: searched item (track).
+ * @maxItem: maximum number of items to be displayed.
+ *					 when top-results calls Tracks, maxItem of 5 is passed.
+ */
 const Tracks = ({ itemData, maxItem = 20 }) => (
 	<div className='tracks-wrapper'>
 		{itemData.tracks.map((track, i) => (

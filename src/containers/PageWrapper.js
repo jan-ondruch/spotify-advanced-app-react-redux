@@ -4,6 +4,13 @@ import Artists from '../components/Artists'
 import Albums from '../components/Albums'
 import Tracks from '../components/Tracks'
 
+
+/*
+ * Wrapps the found results. Depending on the tab selected, renders the corresponding
+ * component.
+ * @page: currently selected page (navigation)
+ * @itemData: fetched item data to be displayed.
+ */
 const PageWrapper = ({ page, itemData }) => {
 	switch(page) {
 		case 'top-results':

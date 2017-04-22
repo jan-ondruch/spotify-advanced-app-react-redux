@@ -6,6 +6,7 @@ import {
 	SELECT_PAGE,
 } from '../actions'
 
+// Currently selected page - used with rr-v4 to dynamically change the url and navigation.
 const page = (state = 'top-results', action) => {
 	switch(action.type) {
 		case SELECT_PAGE:
@@ -15,7 +16,7 @@ const page = (state = 'top-results', action) => {
 	}
 }
 
-// initial state is overwritten in the App component
+// Initial state is overwritten in the App component.
 const item = (state = '', action) => {
 	switch(action.type) {
 		case SEARCH_ITEM:
@@ -59,6 +60,10 @@ const spotifyApp = (state = {}, action) => {
 	}
 }
 
+// Combine all app states.
+// @spotifyApp: object containing all searched items.
+// @item: currently searched item.
+// @page: currently selected page (navigation).
 const rootReducer = combineReducers({
 	spotifyApp,
 	item,

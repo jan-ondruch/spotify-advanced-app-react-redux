@@ -3,7 +3,15 @@ import { connect } from 'react-redux'
 
 import '../styles/searchBar.css'
 
-let SearchBar = ({ dispatch, onChange, item }) => {
+
+/*
+ * Search bar to search for an item (artist, album, track).  
+ * @onChange: On every change sends the current value to a parent component,
+ * 						which uses it e.g. for immediate dynamic url change.
+ * @item: if value of the searched item is implicitly defined in url,
+ *				it's set as a default value in the search bar (form).
+ */
+const SearchBar = ({ onChange, item }) => {
 	let input = item
 
 	return (

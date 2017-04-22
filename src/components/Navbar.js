@@ -3,6 +3,13 @@ import FilterLink from '../containers/FilterLink'
 
 import '../styles/navbar.css'
 
+
+/*
+ * Navbar for page (tab) selection.
+ * @onClick: prop function for notifying the parent component the tab has changed.
+ * @subPage: currently searched item.
+ * @page: currently selected page (tab).
+ */
 const Navbar = ({ onClick, subPage, page }) => (
 	<div className='navbar-wrapper'>
 		<li style={{textDecoration: page === 'top-results' ? 'underline' : 'none',

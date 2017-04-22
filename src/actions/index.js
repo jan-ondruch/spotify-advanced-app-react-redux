@@ -9,6 +9,7 @@ export const selectPage = page => ({
 	page
 })
 
+
 export const searchItem = item => ({
 	type: SEARCH_ITEM,
 	item
@@ -24,7 +25,6 @@ export const receiveItem = (item, json) => ({
   item,
   itemData: json
 })
-
 
 
 const mergeFetchedData = (artists, albums, tracks) => ({
@@ -72,6 +72,7 @@ const fetchArtists = item => dispatch => {
 		})))
 }
 
+// Get all data for the searched item and return them only when all of them were fetched.
 export const fetchData = searchedItem => dispatch => {
 	let setArtists = dispatch(fetchArtists(searchedItem))
 	let setAlbums = dispatch(fetchAlbums(searchedItem))

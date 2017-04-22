@@ -9,6 +9,10 @@ import '../styles/albums.css'
 import '../styles/top-results.css'
 
 
+/*
+ * Renders all from the selected item (tracks, artists and albums).
+ * @itemData: searched item.
+ */
 const TopResults = ({ itemData }) => (
 	<div>
 		{itemData.tracks.length === 0 ? '' :

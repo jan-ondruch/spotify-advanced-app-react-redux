@@ -3,6 +3,13 @@ import React from 'react'
 import '../styles/albums.css'
 import artistImg from '../images/artist-music.jpg'
 
+
+/*
+ * Renders searched albums.
+ * @itemData: searched item (album).
+ * @maxItem: maximum number of items to be displayed.
+ *					 when top-results calls Albums, maxItem of 8 is passed.
+ */
 const Albums = ({ itemData, maxItem = 20 }) => (
 	<div className='albums-wrapper'>
 		{itemData.albums.map((album, i) => (

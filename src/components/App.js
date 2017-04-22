@@ -42,7 +42,7 @@ class App extends Component {
 
 	componentDidMount() {
 		const { dispatch, item } = this.props
-		if (item === '') return	// Avoid initial fetch for no data
+		if (item === '') return	// Avoid initial fetch for no data.
 		dispatch(fetchData(item))
 	}
 
@@ -143,7 +143,7 @@ const mapStateToProps = (state, ownProps) => {
 		itemData,
 		isFetching,
 		dynamicUrlChange,
-		ownProps // Maybe don't pass the whole ownProps, just the functions/params you need
+		ownProps
 	}
 }
 
