@@ -11,7 +11,7 @@ import '../styles/searchBar.css'
  * @item: if value of the searched item is implicitly defined in url,
  *				it's set as a default value in the search bar (form).
  */
-const SearchBar = ({ onChange, item }) => {
+let SearchBar = ({ onChange, item }) => {
 	let input = item
 
 	return (
