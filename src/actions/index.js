@@ -3,7 +3,6 @@ export const REQUEST_ITEM = 'REQUEST_ITEM'
 export const RECEIVE_ITEM = 'RECEIVE_ITEM'
 export const SELECT_PAGE = 'SELECT_PAGE'
 
-
 export const selectPage = page => ({
 	type: SELECT_PAGE,
 	page
