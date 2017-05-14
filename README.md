@@ -13,7 +13,7 @@ I didn't manage to work out the initial server render yet, therefore directly en
 Adding links even to found results and get further data from there - this would require rewriting fetch functions and improving current routing solution.
 
 ### Delay on fetch (debounce)
-So far I haven't managed to figure out how to use debounce with redux and thunk. Simply solution with undescore.js doesn't work properly. Solving this problem would probably require writing my own middleware.
+So far I haven't managed to figure out how to use debounce on typing with redux and thunk. Simply solution with undescore.js doesn't work properly. Solving this problem would probably require writing my own middleware.
 
 ### Hide navbar item with no results
 If data is fetched and e.g. no artist is found, but albums and tracks are, the artist tab would disappear - requires advanced workaround.
