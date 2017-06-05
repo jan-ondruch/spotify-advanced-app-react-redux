@@ -4,6 +4,7 @@ import {
 	REQUEST_ITEM,
 	RECEIVE_ITEM,
 	SELECT_PAGE,
+	SAVE_TOKEN
 } from '../actions'
 
 // Currently selected page - used with rr-v4 to dynamically change the url and navigation.
@@ -21,6 +22,16 @@ const item = (state = '', action) => {
 	switch(action.type) {
 		case SEARCH_ITEM:
 			return action.item
+		default:
+			return state
+	}
+}
+
+// Saving of the token parsed by url
+const token = (state = '', action) => {
+	switch(action.type) {
+		case SAVE_TOKEN:
+			return action.token
 		default:
 			return state
 	}
@@ -68,6 +79,7 @@ const rootReducer = combineReducers({
 	spotifyApp,
 	item,
 	page,
+	token
 })
 
 export default rootReducer

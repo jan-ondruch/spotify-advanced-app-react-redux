@@ -2,12 +2,13 @@ export const SEARCH_ITEM = 'SEARCH_ITEM'
 export const REQUEST_ITEM = 'REQUEST_ITEM'
 export const RECEIVE_ITEM = 'RECEIVE_ITEM'
 export const SELECT_PAGE = 'SELECT_PAGE'
+export const SAVE_TOKEN = 'SAVE_TOKEN'
+
 
 export const selectPage = page => ({
 	type: SELECT_PAGE,
 	page
 })
-
 
 export const searchItem = item => ({
 	type: SEARCH_ITEM,
@@ -25,6 +26,11 @@ export const receiveItem = (item, json) => ({
   itemData: json
 })
 
+export const saveToken = token => ({
+	type: SAVE_TOKEN,
+	token
+})
+
 
 const mergeFetchedData = (artists, albums, tracks) => ({
 	artists: artists,
@@ -32,9 +38,14 @@ const mergeFetchedData = (artists, albums, tracks) => ({
 	tracks: tracks
 })
 
-const fetchTracks = item => dispatch => {
+const fetchTracks = (item, token) => dispatch => {
 	dispatch(requestItem(item))
-	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=track`)
+	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=track`, { 
+      method: 'get', 
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    }) 
 		.then(response => response.json())
 		.then(json => json.tracks.items.map(item => ({
 			id: item.id,
@@ -48,9 +59,14 @@ const fetchTracks = item => dispatch => {
 		})))
 }
 
-const fetchAlbums = item => dispatch => {
+const fetchAlbums = (item, token) => dispatch => {
 	dispatch(requestItem(item))
-	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=album`)
+	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=album`, { 
+      method: 'get', 
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    })
 		.then(response => response.json())
 		.then(json => json.albums.items.map(item => ({
 			id: item.id,
@@ -60,9 +76,14 @@ const fetchAlbums = item => dispatch => {
  		})))
 }
 
-const fetchArtists = item => dispatch => {
+const fetchArtists = (item, token) => dispatch => {
 	dispatch(requestItem(item))
-	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=artist`)
+	return fetch(`https://api.spotify.com/v1/search?q=${item}&type=artist`, { 
+      method: 'get', 
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    })
 		.then(response => response.json())
 		.then(json => json.artists.items.map(item => ({
 			id: item.id,
@@ -72,10 +93,10 @@ const fetchArtists = item => dispatch => {
 }
 
 // Get all data for the searched item and return them only when all of them were fetched.
-export const fetchData = searchedItem => dispatch => {
-	let setArtists = dispatch(fetchArtists(searchedItem))
-	let setAlbums = dispatch(fetchAlbums(searchedItem))
-	let setTracks = dispatch(fetchTracks(searchedItem))
+export const fetchData = (searchedItem, token) => dispatch => {
+	let setArtists = dispatch(fetchArtists(searchedItem, token))
+	let setAlbums = dispatch(fetchAlbums(searchedItem, token))
+	let setTracks = dispatch(fetchTracks(searchedItem, token))
 
 	Promise.all([setArtists, setAlbums, setTracks])
 		.then(values => mergeFetchedData(...values))

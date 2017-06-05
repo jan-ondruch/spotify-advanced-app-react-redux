@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SearchBar from '../containers/SearchBar'
 import Navbar from './Navbar'
 import PageWrapper from '../containers/PageWrapper'
-import { searchItem, selectPage, fetchData } from '../actions'
+import { searchItem, selectPage, fetchData, saveToken } from '../actions'
 import { connect } from 'react-redux'
 
 import '../styles/app.css'
@@ -12,6 +12,25 @@ class App extends Component {
 	// Fix initial url paths and redirect accordingly.
 	componentWillMount() {
 		const { dynamicUrlChange, ownProps, page, item } = this.props
+
+		// Nasty workaround of setting an access token due to the Spotify API changes.
+		// Processing a token on a client-side is inefficient in the way the app is built,
+		// using Node.js for server and client side code would be way more cleaner.
+		if (process.env.NODE_ENV !== 'production') {
+		  if (/localhost:3000\/$/.test(window.location.href)) {
+				window.location.replace("https://accounts.spotify.com/authorize?client_id=6370e456654740c8bf8d82444a8b950b&redirect_uri=http:%2F%2Flocalhost%3A%33%30%30%30&response_type=token&state=123")
+			}
+		}
+		else {
+			if (/advanced-spotify.surge.sh\/$/.test(window.location.href)) {
+				window.location.replace("https://accounts.spotify.com/authorize?client_id=6370e456654740c8bf8d82444a8b950b&redirect_uri=http:%2F%2Fadvanced-spotify.surge.sh&response_type=token&state=123")
+			}
+		}
+
+		// Save access token from the url to the state
+		let url = window.location.href
+  	let accessToken = url.match(/#(?:access_token)=([\S\s]*?)&/)[1]
+  	this.props.dispatch(saveToken(accessToken))
 
 		// Navigate from room '/' to '/top-results/'
 		if (ownProps.match.url === '/')	{
@@ -41,9 +60,9 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		const { dispatch, item } = this.props
+		const { dispatch, item, token } = this.props
 		if (item === '') return	// Avoid initial fetch for no data.
-		dispatch(fetchData(item))
+		dispatch(fetchData(item, token))
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -62,8 +81,8 @@ class App extends Component {
 		// Fetch new incoming data if the searched string is different.
 		else {
 			if (nextProps.item !== this.props.item) {
-				const { dispatch, item } = nextProps
-				dispatch(fetchData(item))
+				const { dispatch, item, token } = nextProps
+				dispatch(fetchData(item, token))
 			}
 		}
 	}
@@ -120,7 +139,7 @@ const Info = () => (
 
 
 const mapStateToProps = (state, ownProps) => {
-	let { item, page, spotifyApp } = state
+	let { item, page, spotifyApp, token } = state
 	// 2-way binding with rr-v4.
 	// @item: Get the item from the search bar, if none, take it from the url, '' as fallback.
 	page = ownProps.match.params.page || page	
@@ -143,7 +162,8 @@ const mapStateToProps = (state, ownProps) => {
 		itemData,
 		isFetching,
 		dynamicUrlChange,
-		ownProps
+		ownProps,
+		token
 	}
 }
 

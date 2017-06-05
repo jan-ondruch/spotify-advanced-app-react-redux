@@ -4,6 +4,9 @@ A simplified Spotify-based app for technology and demonstration purposes - build
 Try the demo at http://advanced-spotify.surge.sh/<br><br>
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
+## Update
+Due to changes in Spotify API (29.5.2017) the app fetching was changed (in a kind of nasty way since it's entirely built as a client-side code and processing a token there due to CORS isn't the best way to do things).
+
 ## Possible future improvements
 
 ### SSR
